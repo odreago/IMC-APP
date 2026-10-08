@@ -1,10 +1,40 @@
 import { useState } from 'react'
+import styled from 'styled-components'
+
+// styled
+const Titulo = styled.h1`
+    text-align: center;
+    padding: 8px 0;
+`
+
+const Botao = styled.button`
+    width: 100%;
+    background-color: ${(props) => props.$cor};
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    padding: 8px;
+    border: none;
+    margin: 16px 0 0;
+    transition: 0.5s;
+
+    &:hover{
+        background-color: ${(props) => props.$hoverColor};
+    }
+`
+
 
 
 function App() {
   const [ peso, setPeso] = useState ('')
   const [ altura, setAltura] = useState ('')
   const [ resultado, setResultado] = useState ('')
+
+  function Limpar(){
+    setAltura ('');
+    setPeso ('');
+    setResultado ('');
+  }
   
   
   function Calcular() {
@@ -57,7 +87,7 @@ function App() {
           <div className='card mt-5'>
             <div className='card-body'>
 
-            <h1 className='mt-2 text-center mb-3'> Calcular IMC </h1>
+            <Titulo>Calcular IMC</Titulo>
             {/* input do peso */}
             <input type="number" className='form-control mb-2' placeholder='Seu Peso'
             value={peso}
@@ -68,7 +98,16 @@ function App() {
             value={altura}
             onChange={(e) => setAltura(e.target.value)}/>
 
-            <button className='btn btn-primary mt-2 w-100 text-center' onClick={Calcular}>Enviar</button>
+            <Botao 
+            $cor="#0062ff"
+            $hoverColor = "#4141ea"
+            onClick={Calcular}>Enviar</Botao>
+
+            <Botao
+            $cor="#f81b1b"
+            $hoverColor="#e80000"
+            onClick={Limpar}>Limpar</Botao>
+
             <p className='mt-3 fs-5 fw-bold text-center'>{resultado}</p>
 
             </div>
